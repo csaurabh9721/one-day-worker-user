@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/address")
+@RequestMapping("/userApi/address")
 @AllArgsConstructor
 public class AddressController {
     private AddressService addressService;
 
-    @GetMapping("/get")
-    public ResponseEntity<ApiResponse<List<AddressDTO>>> getAllUsers() {
+    @GetMapping("/getAllAddress")
+    public ResponseEntity<ApiResponse<List<AddressDTO>>> getAllAddress() {
         List<AddressDTO> users = addressService.getAddresses();
         ApiResponse<List<AddressDTO>> response = new ApiResponse<>(HttpStatus.OK.value(), users, "Address fetched successfully");
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/save/{id}")
-    public ResponseEntity<ApiResponse<UsersDTO>> addUser(@Valid @PathVariable Long id,@Valid @RequestBody AddressDTO dto) {
+    @PostMapping("/addAddressByUser/{id}")
+    public ResponseEntity<ApiResponse<UsersDTO>> addAddressByUser(@Valid @PathVariable Long id,@Valid @RequestBody AddressDTO dto) {
 
         UsersDTO users = addressService.saveAddress(id, dto);
         ApiResponse<UsersDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "Address saved successfully");
