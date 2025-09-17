@@ -12,7 +12,7 @@ public class Address {
     private Long id;
     private String streetName;
     private String locality;
-    private String sublocality;
+    private String subLocality;
     private String city;
     private String state;
     private String country;
