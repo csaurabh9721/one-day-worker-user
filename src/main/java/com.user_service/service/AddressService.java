@@ -6,6 +6,7 @@ import com.user_service.dto.UsersDTO;
 import java.util.List;
 
 public interface AddressService {
-    UsersDTO saveAddress(Long userId, AddressDTO addressDTO);
+    AddressDTO saveAddress(Long userId, AddressDTO addressDTO);
     List<AddressDTO> getAddresses();
+    AddressDTO getAddressByUserId(Long userId);
 }

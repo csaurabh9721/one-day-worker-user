@@ -21,12 +21,17 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ApiResponse<String>> handleUserNotFound(UserNotFoundException ex) {
+    @ExceptionHandler(ResourceNotFound.class)
+    public ResponseEntity<ApiResponse<String>> handleUserNotFound(ResourceNotFound ex) {
         ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND.value(), ex.getMessage(), "Not Found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
-
+    @ExceptionHandler(org.springframework.web.HttpRequestMethodNotSupportedException.class)
+    public ResponseEntity<ApiResponse<String>> handleMethodNotAllowed(org.springframework.web.HttpRequestMethodNotSupportedException ex) {
+        String message = "Request method '" + ex.getMethod() + "' not supported. Allowed methods: " + ex.getSupportedHttpMethods();
+        ApiResponse<String> response = new ApiResponse<>(HttpStatus.METHOD_NOT_ALLOWED.value(), message, "Method Not Allowed");
+        return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(response);
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<String>> handleGenericException(Exception ex) {

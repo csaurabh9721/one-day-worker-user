@@ -2,7 +2,7 @@ package com.user_service.serviceImpl;
 
 import com.user_service.dto.UsersDTO;
 import com.user_service.entity.Users;
-import com.user_service.globleException.UserNotFoundException;
+import com.user_service.globleException.ResourceNotFound;
 import com.user_service.repository.UserRepository;
 import com.user_service.service.UserService;
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UsersDTO getUserById(Long id) {
-        Users user = repository.findById(id).orElseThrow(() -> new UserNotFoundException("User", id));
+        Users user = repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
         return convertToDto(user);
     }
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UsersDTO updateUser(Long id, UsersDTO dto) {
         Users existingUser = repository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User", id));
+                .orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
 
         existingUser.setName(dto.getName());
         existingUser.setAge(dto.getAge());
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUserById(Long id) {
-        Users user = repository.findById(id).orElseThrow(() -> new UserNotFoundException("User", id));
+        Users user = repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
         repository.deleteById(id);
         return true;
     }

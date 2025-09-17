@@ -17,8 +17,7 @@ public class Users {
     @Column(length = 15,unique = true)
     private String mobile;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id",referencedColumnName = "id")
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private Address address;
 

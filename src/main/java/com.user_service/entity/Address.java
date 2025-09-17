@@ -18,7 +18,8 @@ public class Address {
     private String country;
     private Integer pinCode;
 
-    @OneToOne(mappedBy = "address")
+    @OneToOne
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private Users users;
 }

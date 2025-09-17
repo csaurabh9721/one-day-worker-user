@@ -2,7 +2,6 @@ package com.user_service.Controllers;
 
 import com.user_service.dto.AddressDTO;
 import com.user_service.dto.ApiResponse;
-import com.user_service.dto.UsersDTO;
 import com.user_service.service.AddressService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -26,10 +25,16 @@ public class AddressController {
     }
 
     @PostMapping("/addAddressByUser/{id}")
-    public ResponseEntity<ApiResponse<UsersDTO>> addAddressByUser(@Valid @PathVariable Long id,@Valid @RequestBody AddressDTO dto) {
+    public ResponseEntity<ApiResponse<AddressDTO>> addAddressByUser(@PathVariable Long id,@Valid @RequestBody AddressDTO dto) {
+        AddressDTO users = addressService.saveAddress(id, dto);
+        ApiResponse<AddressDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "Address saved successfully");
+        return ResponseEntity.ok(response);
+    }
 
-        UsersDTO users = addressService.saveAddress(id, dto);
-        ApiResponse<UsersDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "Address saved successfully");
+    @GetMapping("/getAddressByUserId/{id}")
+    public ResponseEntity<ApiResponse<AddressDTO>> getAddressByUserId(@PathVariable Long id) {
+        AddressDTO users = addressService.getAddressByUserId(id);
+        ApiResponse<AddressDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "Address fetched successfully");
         return ResponseEntity.ok(response);
     }
 

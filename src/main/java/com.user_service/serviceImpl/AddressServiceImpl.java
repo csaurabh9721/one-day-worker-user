@@ -1,10 +1,9 @@
 package com.user_service.serviceImpl;
 
 import com.user_service.dto.AddressDTO;
-import com.user_service.dto.UsersDTO;
 import com.user_service.entity.Address;
 import com.user_service.entity.Users;
-import com.user_service.globleException.UserNotFoundException;
+import com.user_service.globleException.ResourceNotFound;
 import com.user_service.repository.AddressRepository;
 import com.user_service.repository.UserRepository;
 import com.user_service.service.AddressService;
@@ -28,35 +27,35 @@ public class AddressServiceImpl implements AddressService {
         return users.stream().map(this::convertToDto).toList();
     }
 
+    @Override
+    public AddressDTO getAddressByUserId(Long userId) {
+        Users userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFound("User not found with id :" +userId));
+        Address addressEntity = userEntity.getAddress();
+        if (addressEntity == null) {
+            throw new ResourceNotFound("Address not found with id :" +userId);
+        }
+        return convertToDto(userEntity.getAddress());
+    }
+
 
     @Override
     @Transactional
-    public UsersDTO saveAddress(Long userId, AddressDTO dto) {
+    public AddressDTO saveAddress(Long userId, AddressDTO dto) {
         Users userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new UserNotFoundException("User", userId));
-        if(userEntity.getAddress() == null){
-            Address addressEntity = convertToEntity(dto);
+                .orElseThrow(() -> new ResourceNotFound("User not found with id :" +userId));
+        Address addressEntity = userEntity.getAddress();
+        if (addressEntity == null) {
+            addressEntity = convertToEntity(dto);
             addressEntity.setUsers(userEntity);
-            Address savedAddress = repository.save(addressEntity);
-            userEntity.setAddress(savedAddress);
-            userRepository.save(userEntity);
-        }else {
-            Address addressEntity = userEntity.getAddress();
-            addressEntity.setStreetName(dto.getStreetName());
-            addressEntity.setSublocality(dto.getSublocality());
-            addressEntity.setLocality(dto.getLocality());
-            addressEntity.setCity(dto.getCity());
-            addressEntity.setState(dto.getState());
-            addressEntity.setCountry(dto.getCountry());
-            addressEntity.setPinCode(dto.getPinCode());
-            Address savedAddress = repository.save(addressEntity);
-            userEntity.setAddress(savedAddress);
-            userRepository.save(userEntity);
+        } else {
+            Long existingId = addressEntity.getId();
+            modelMapper.map(dto, addressEntity);
+            addressEntity.setId(existingId);
         }
-
-        return modelMapper.map(userEntity, UsersDTO.class);
+        Address savedAddress = repository.save(addressEntity);
+        return modelMapper.map(savedAddress, AddressDTO.class);
     }
-
 
 
     public AddressDTO convertToDto(Address userEntity) {
