@@ -1,7 +1,6 @@
 package com.user_service.service;
 
 import com.user_service.dto.AddressDTO;
-import com.user_service.dto.UsersDTO;
 
 import java.util.List;
 

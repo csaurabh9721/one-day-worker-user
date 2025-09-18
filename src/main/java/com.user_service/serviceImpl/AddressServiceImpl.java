@@ -2,7 +2,7 @@ package com.user_service.serviceImpl;
 
 import com.user_service.dto.AddressDTO;
 import com.user_service.entity.Address;
-import com.user_service.entity.Users;
+import com.user_service.entity.User;
 import com.user_service.globleException.ResourceNotFound;
 import com.user_service.repository.AddressRepository;
 import com.user_service.repository.UserRepository;
@@ -29,7 +29,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressDTO getAddressByUserId(Long userId) {
-        Users userEntity = userRepository.findById(userId)
+        User userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFound("User not found with id :" +userId));
         Address addressEntity = userEntity.getAddress();
         if (addressEntity == null) {
@@ -42,12 +42,12 @@ public class AddressServiceImpl implements AddressService {
     @Override
     @Transactional
     public AddressDTO saveAddress(Long userId, AddressDTO dto) {
-        Users userEntity = userRepository.findById(userId)
+        User userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFound("User not found with id :" +userId));
         Address addressEntity = userEntity.getAddress();
         if (addressEntity == null) {
             addressEntity = convertToEntity(dto);
-            addressEntity.setUsers(userEntity);
+            addressEntity.setUser(userEntity);
         } else {
             Long existingId = addressEntity.getId();
             modelMapper.map(dto, addressEntity);

@@ -1,7 +1,7 @@
 package com.user_service.Controllers;
 
 import com.user_service.dto.ApiResponse;
-import com.user_service.dto.UsersDTO;
+import com.user_service.dto.UserDTO;
 import com.user_service.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -12,36 +12,36 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/userApi/user")
+@RequestMapping("/userService/user")
 @AllArgsConstructor
 public class UserController {
     private UserService userService;
 
     @GetMapping("/getUserById/{id}")
-    public ResponseEntity<ApiResponse<UsersDTO>> getUserById(@PathVariable Long id) {
-        UsersDTO users = userService.getUserById(id);
-        ApiResponse<UsersDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "User fetched successfully");
+    public ResponseEntity<ApiResponse<UserDTO>> getUserById(@PathVariable Long id) {
+        UserDTO user = userService.getUserById(id);
+        ApiResponse<UserDTO> response = new ApiResponse<>(HttpStatus.OK.value(), user, "User fetched successfully");
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/getAllUsers")
-    public ResponseEntity<ApiResponse<List<UsersDTO>>> getAllUsers() {
-        List<UsersDTO> users = userService.getUsers();
-        ApiResponse<List<UsersDTO>> response = new ApiResponse<>(HttpStatus.OK.value(), users, "User fetched successfully");
+    public ResponseEntity<ApiResponse<List<UserDTO>>> getAllUsers() {
+        List<UserDTO> users = userService.getUsers();
+        ApiResponse<List<UserDTO>> response = new ApiResponse<>(HttpStatus.OK.value(), users, "User fetched successfully");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/userRegister")
-    public ResponseEntity<ApiResponse<UsersDTO>> userRegister(@Valid @RequestBody UsersDTO dto) {
-        UsersDTO users = userService.adduser(dto);
-        ApiResponse<UsersDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "User saved successfully");
+    public ResponseEntity<ApiResponse<UserDTO>> userRegister(@Valid @RequestBody UserDTO dto) {
+        UserDTO user = userService.adduser(dto);
+        ApiResponse<UserDTO> response = new ApiResponse<>(HttpStatus.OK.value(), user, "User saved successfully");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping("/updateUserByUserId/{id}")
-    public ResponseEntity<ApiResponse<UsersDTO>> updateUserByUserId(@Valid @PathVariable Long id, @RequestBody UsersDTO dto) {
-        UsersDTO users = userService.updateUser(id, dto);
-        ApiResponse<UsersDTO> response = new ApiResponse<>(HttpStatus.OK.value(), users, "User updated successfully");
+    public ResponseEntity<ApiResponse<UserDTO>> updateUserByUserId(@Valid @PathVariable Long id, @RequestBody UserDTO dto) {
+        UserDTO user = userService.updateUser(id, dto);
+        ApiResponse<UserDTO> response = new ApiResponse<>(HttpStatus.OK.value(), user, "User updated successfully");
         return ResponseEntity.ok(response);
     }
 

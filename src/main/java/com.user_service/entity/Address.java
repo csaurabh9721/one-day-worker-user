@@ -21,5 +21,5 @@ public class Address {
     @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
-    private Users users;
+    private User user;
 }

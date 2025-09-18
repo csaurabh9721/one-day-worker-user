@@ -1,7 +1,7 @@
 package com.user_service.serviceImpl;
 
-import com.user_service.dto.UsersDTO;
-import com.user_service.entity.Users;
+import com.user_service.dto.UserDTO;
+import com.user_service.entity.User;
 import com.user_service.globleException.ResourceNotFound;
 import com.user_service.repository.UserRepository;
 import com.user_service.service.UserService;
@@ -18,27 +18,27 @@ public class UserServiceImpl implements UserService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<UsersDTO> getUsers() {
-        List<Users> users = repository.findAll();
+    public List<UserDTO> getUsers() {
+        List<User> users = repository.findAll();
         return users.stream().map(this::convertToDto).toList();
     }
 
     @Override
-    public UsersDTO getUserById(Long id) {
-        Users user = repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
+    public UserDTO getUserById(Long id) {
+        User user = repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
         return convertToDto(user);
     }
 
     @Override
-    public UsersDTO adduser(UsersDTO dto) {
-        Users users = convertToEntity(dto);
-        Users savedUser = repository.save(users);
+    public UserDTO adduser(UserDTO dto) {
+        User user = convertToEntity(dto);
+        User savedUser = repository.save(user);
         return convertToDto(savedUser);
     }
 
     @Override
-    public UsersDTO updateUser(Long id, UsersDTO dto) {
-        Users existingUser = repository.findById(id)
+    public UserDTO updateUser(Long id, UserDTO dto) {
+        User existingUser = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
 
         existingUser.setName(dto.getName());
@@ -46,23 +46,23 @@ public class UserServiceImpl implements UserService {
         existingUser.setMobile(dto.getMobile());
         existingUser.setPhoto(dto.getPhoto());
         existingUser.setAddress(existingUser.getAddress());
-        Users savedUser = repository.save(existingUser);
+        User savedUser = repository.save(existingUser);
         return convertToDto(savedUser);
     }
 
     @Override
     public boolean deleteUserById(Long id) {
-        Users user = repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
+        User user = repository.findById(id).orElseThrow(() -> new ResourceNotFound("User not found with id :" + id));
         repository.deleteById(id);
         return true;
     }
 
-    public UsersDTO convertToDto(Users userEntity) {
-        return modelMapper.map(userEntity, UsersDTO.class);
+    public UserDTO convertToDto(User userEntity) {
+        return modelMapper.map(userEntity, UserDTO.class);
     }
 
-    public Users convertToEntity(UsersDTO userDto) {
-        return modelMapper.map(userDto, Users.class);
+    public User convertToEntity(UserDTO userDto) {
+        return modelMapper.map(userDto, User.class);
     }
 
 }

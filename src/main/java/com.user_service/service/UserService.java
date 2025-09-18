@@ -1,17 +1,17 @@
 package com.user_service.service;
 
-import com.user_service.dto.UsersDTO;
+import com.user_service.dto.UserDTO;
 
 import java.util.List;
 
 public interface UserService {
-    List<UsersDTO> getUsers();
+    List<UserDTO> getUsers();
 
-    UsersDTO getUserById(Long id);
+    UserDTO getUserById(Long id);
 
-    UsersDTO adduser(UsersDTO dto);
+    UserDTO adduser(UserDTO dto);
 
-    UsersDTO updateUser(Long id,UsersDTO dto);
+    UserDTO updateUser(Long id, UserDTO dto);
 
     boolean deleteUserById(Long id);
 
