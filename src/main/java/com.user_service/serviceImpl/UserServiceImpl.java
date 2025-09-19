@@ -1,16 +1,20 @@
 package com.user_service.serviceImpl;
 
+import com.user_service.dto.AddressDTO;
 import com.user_service.dto.UserDTO;
+import com.user_service.entity.Address;
 import com.user_service.entity.User;
 import com.user_service.globleException.ResourceNotFound;
 import com.user_service.repository.UserRepository;
 import com.user_service.service.UserService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -57,12 +61,39 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public UserDTO convertToDto(User userEntity) {
-        return modelMapper.map(userEntity, UserDTO.class);
-    }
-
     public User convertToEntity(UserDTO userDto) {
         return modelMapper.map(userDto, User.class);
     }
 
+    public UserDTO convertToDto1(User entity) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(entity.getId());
+        userDTO.setName(entity.getName());
+        userDTO.setAge(entity.getAge());
+        userDTO.setMobile(entity.getMobile());
+        userDTO.setPhoto(entity.getPhoto());
+
+        if (entity.getAddress() != null) {
+            AddressDTO address = getAddressDTO(entity);
+            userDTO.setAddress(address);
+        }
+        return userDTO;
+    }
+
+    private static AddressDTO getAddressDTO(User entity) {
+        AddressDTO address = new AddressDTO();
+        address.setId(entity.getAddress().getId());
+        address.setCity(entity.getAddress().getCity());
+        address.setState(entity.getAddress().getState());
+        address.setCountry(entity.getAddress().getCountry());
+        address.setLocality(entity.getAddress().getLocality());
+        address.setSubLocality(entity.getAddress().getSubLocality());
+        address.setStreetName(entity.getAddress().getStreetName());
+        address.setPinCode(entity.getAddress().getPinCode());
+        return address;
+    }
+
+    public UserDTO convertToDto(User userEntity) {
+        return modelMapper.map(userEntity, UserDTO.class);
+    }
 }
