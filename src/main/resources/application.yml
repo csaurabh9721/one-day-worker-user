@@ -3,7 +3,7 @@ spring:
     name: User-Service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/user_service
+    url: jdbc:mysql://mysql:3306/user_service
     username: root
     #password: 972114@Ss
     password: root9721
@@ -20,7 +20,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8080/eureka/
+      defaultZone: http://eureka-server:8080/eureka/
       fetch-registry: true
       registry-with-eureka: true
   instance:
