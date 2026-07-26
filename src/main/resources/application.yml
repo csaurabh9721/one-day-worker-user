@@ -1,9 +1,9 @@
 spring:
   application:
-    name: User-Service
+    name: Customer-Service
 
   datasource:
-    url: jdbc:mysql://host.docker.internal/user_service
+    url: jdbc:mysql://host.docker.internal/customer_service
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver

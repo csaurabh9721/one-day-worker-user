@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.user_service</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>customer-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>User Service</name>
-	<description>This is the User microservice for One-Day-Worker backend</description>
+	<name>Customer Service</name>
+	<description>This is the Customer microservice for One-Day-Worker backend</description>
 	<url/>
 	<licenses>
 		<license/>
