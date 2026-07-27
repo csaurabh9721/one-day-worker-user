@@ -37,12 +37,23 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerResponseDto addCustomer(CustomerRequestDto dto) {
-        if(repository.existsByIdentityId(dto.getIdentityId())){
-            throw new DuplicateRequestContentException("Customer with identity ID " + dto.getIdentityId() + " already exists");
-        }
-        Customer customer = convertToEntity(dto);
-        Customer savedCustomer = repository.save(customer);
-        return convertToDto(savedCustomer);
+        log.info("Adding customer to DB");
+      //  try {
+
+            if(repository.existsByIdentityId(dto.getIdentityId())){
+                throw new DuplicateRequestContentException("Customer with identity ID " + dto.getIdentityId() + " already exists");
+            }
+            Customer customer = convertToEntity(dto);
+
+        log.info("Customer ID       : " + customer.getId());
+        log.info("Customer Identity : " + customer.getIdentityId());
+            Customer savedCustomer = repository.save(customer);
+            return convertToDto(savedCustomer);
+//        }catch (Exception e){
+//            log.error("Error occurred while adding customer", e);
+//            throw new ResourceNotFound("error is " + e.toString());
+//        }
+
     }
 
     @Override
@@ -66,8 +77,16 @@ public class CustomerServiceImpl implements CustomerService {
         return true;
     }
 
-    public Customer convertToEntity(CustomerRequestDto userDto) {
-        return modelMapper.map(userDto, Customer.class);
+    public Customer convertToEntity(CustomerRequestDto dto) {
+        return Customer.builder()
+                .identityId(dto.getIdentityId())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .phone(dto.getPhone())
+                .gender(dto.getGender())
+                .dob(dto.getDob())
+                .profileImage(dto.getProfileImage())
+                .build();
     }
 
     public CustomerResponseDto convertToDto(Customer entity) {

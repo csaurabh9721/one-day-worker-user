@@ -34,10 +34,9 @@ public class CustomerController {
     }
 
     @PostMapping("/customerRegister")
-    public ResponseEntity<ApiResponse<CustomerResponseDto>> customerRegister(@Valid @RequestBody CustomerRequestDto dto) {
+    public ResponseEntity<CustomerResponseDto> customerRegister(@Valid @RequestBody CustomerRequestDto dto) {
         CustomerResponseDto customer = customerService.addCustomer(dto);
-        ApiResponse<CustomerResponseDto> response = new ApiResponse<>(HttpStatus.OK.value(), customer, "Customer saved successfully");
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(customer);
     }
 
     @PutMapping("/updateCustomerByCustomerId/{id}")
