@@ -3,7 +3,6 @@ package com.customer_service.dto;
 import com.customer_service.util.enums.AddressType;
 import lombok.*;
 
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -12,7 +11,7 @@ import java.util.UUID;
 @Builder
 public class CustomerAddressResponseDto {
 
-    private UUID id;
+    private Long id;
 
     private AddressType addressType;
 

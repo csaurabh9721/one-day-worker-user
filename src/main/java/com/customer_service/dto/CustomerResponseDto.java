@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -14,9 +13,9 @@ import java.util.UUID;
 @Builder
 public class CustomerResponseDto {
 
-    private UUID id;
+    private Long id;
 
-    private UUID identityId;
+    private Long identityId;
 
     private String firstName;
 

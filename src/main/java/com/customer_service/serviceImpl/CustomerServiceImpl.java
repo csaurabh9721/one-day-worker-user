@@ -1,5 +1,7 @@
 package com.customer_service.serviceImpl;
 
+import com.customer_service.AppConfiguration.RabbitMQConfig;
+import com.customer_service.dto.CustomerRegisteredEvent;
 import com.customer_service.dto.CustomerRequestDto;
 import com.customer_service.dto.CustomerResponseDto;
 import com.customer_service.entity.Customer;
@@ -10,6 +12,7 @@ import com.customer_service.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,7 @@ import java.util.UUID;
 public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository repository;
     private final ModelMapper modelMapper;
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public List<CustomerResponseDto> getCustomers() {
@@ -30,34 +34,41 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerResponseDto getCustomerById(UUID id) {
+    public CustomerResponseDto getCustomerById(Long id) {
         Customer customer = repository.findById(id).orElseThrow(() -> new ResourceNotFound("Customer not found with id :" + id));
         return convertToDto(customer);
     }
 
     @Override
     public CustomerResponseDto addCustomer(CustomerRequestDto dto) {
-        log.info("Adding customer to DB");
-      //  try {
 
             if(repository.existsByIdentityId(dto.getIdentityId())){
                 throw new DuplicateRequestContentException("Customer with identity ID " + dto.getIdentityId() + " already exists");
             }
             Customer customer = convertToEntity(dto);
-
-        log.info("Customer ID       : " + customer.getId());
-        log.info("Customer Identity : " + customer.getIdentityId());
             Customer savedCustomer = repository.save(customer);
+        CustomerRegisteredEvent event =
+                new CustomerRegisteredEvent(
+                        1L,
+                        savedCustomer.getIdentityId(),
+                        savedCustomer.getId(),
+                        "Dummy-Email",
+                        savedCustomer.getPhone(),
+                        savedCustomer.getFirstName(),
+                        savedCustomer.getLastName()
+                );
+
+        rabbitTemplate.convertAndSend(
+                RabbitMQConfig.EXCHANGE,
+                RabbitMQConfig.ROUTING_KEY,
+                event
+        );
             return convertToDto(savedCustomer);
-//        }catch (Exception e){
-//            log.error("Error occurred while adding customer", e);
-//            throw new ResourceNotFound("error is " + e.toString());
-//        }
 
     }
 
     @Override
-    public CustomerResponseDto updateCustomer(UUID id, CustomerRequestDto dto) {
+    public CustomerResponseDto updateCustomer(Long id, CustomerRequestDto dto) {
         Customer existingCustomer = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFound("Customer not found with id :" + id));
         existingCustomer.setFirstName(dto.getFirstName());
@@ -71,7 +82,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean deleteCustomerById(UUID id) {
+    public boolean deleteCustomerById(Long id) {
         Customer customer = repository.findById(id).orElseThrow(() -> new ResourceNotFound("Customer not found with id :" + id));
         repository.deleteById(id);
         return true;

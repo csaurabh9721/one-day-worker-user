@@ -4,7 +4,6 @@ import com.customer_service.util.enums.AddressType;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.UUID;
 
 @Entity
 @Table(name = "customer_addresses")
@@ -15,9 +14,6 @@ import java.util.UUID;
 @Builder
 public class CustomerAddress extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

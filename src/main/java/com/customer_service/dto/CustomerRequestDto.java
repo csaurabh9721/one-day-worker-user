@@ -4,7 +4,6 @@ import com.customer_service.util.enums.Gender;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,7 +12,7 @@ import java.util.UUID;
 @Builder
 public class CustomerRequestDto {
 
-    private UUID identityId;
+    private Long identityId;
 
     private String firstName;
 

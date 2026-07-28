@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +23,7 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
     private final CustomerRepository customerRepository;
 
     @Override
-    public List<CustomerAddressResponseDto> getAddressByUserId(UUID userId) {
+    public List<CustomerAddressResponseDto> getAddressByUserId(Long userId) {
         Customer customer = customerRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFound("Customer not found with id :" + userId));
         List<CustomerAddress> addressEntity = customer.getAddresses();
@@ -37,7 +36,7 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
 
     @Override
     @Transactional
-    public CustomerAddressResponseDto saveAddress(UUID customerId, CustomerAddressRequestDto dto) {
+    public CustomerAddressResponseDto saveAddress(Long customerId, CustomerAddressRequestDto dto) {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFound("Customer not found with id :" + customerId));
         CustomerAddress addressEntity = convertToEntity(dto);
@@ -47,7 +46,7 @@ public class CustomerAddressServiceImpl implements CustomerAddressService {
     }
 
     @Override
-    public CustomerAddressResponseDto updateAddress(UUID customerId, UUID addressId, CustomerAddressRequestDto requestDto) {
+    public CustomerAddressResponseDto updateAddress(Long customerId, Long addressId, CustomerAddressRequestDto requestDto) {
 
         CustomerAddress addressEntity = repository
                 .findByIdAndCustomerId(addressId, customerId)

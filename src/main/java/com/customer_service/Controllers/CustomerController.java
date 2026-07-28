@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/customerService/customer")
@@ -20,7 +19,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/getCustomerById/{id}")
-    public ResponseEntity<ApiResponse<CustomerResponseDto>> getCustomerById(@PathVariable UUID id) {
+    public ResponseEntity<ApiResponse<CustomerResponseDto>> getCustomerById(@PathVariable Long id) {
         CustomerResponseDto customer = customerService.getCustomerById(id);
         ApiResponse<CustomerResponseDto> response = new ApiResponse<>(HttpStatus.OK.value(), customer, "Customer fetched successfully");
         return ResponseEntity.ok(response);
@@ -40,14 +39,14 @@ public class CustomerController {
     }
 
     @PutMapping("/updateCustomerByCustomerId/{id}")
-    public ResponseEntity<ApiResponse<CustomerResponseDto>> updateCustomerByCustomerId(@Valid @PathVariable UUID id, @RequestBody CustomerRequestDto dto) {
+    public ResponseEntity<ApiResponse<CustomerResponseDto>> updateCustomerByCustomerId(@Valid @PathVariable Long id, @RequestBody CustomerRequestDto dto) {
         CustomerResponseDto customer = customerService.updateCustomer(id, dto);
         ApiResponse<CustomerResponseDto> response = new ApiResponse<>(HttpStatus.OK.value(), customer, "Customer updated successfully");
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/deleteCustomerByCustomerId/{id}")
-    public ResponseEntity<ApiResponse<Boolean>> deleteCustomerByCustomerId(@PathVariable UUID id) {
+    public ResponseEntity<ApiResponse<Boolean>> deleteCustomerByCustomerId(@PathVariable Long id) {
         boolean deleted = customerService.deleteCustomerById(id);
         ApiResponse<Boolean> response = new ApiResponse<>(HttpStatus.OK.value(), deleted, "Customer deleted successfully");
         return ResponseEntity.ok(response);

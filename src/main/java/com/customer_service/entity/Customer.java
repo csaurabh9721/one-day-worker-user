@@ -7,7 +7,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "customers")
@@ -18,12 +17,10 @@ import java.util.UUID;
 @Builder
 public class Customer extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+
 
     @Column(nullable = false, unique = true)
-    private UUID identityId;
+    private Long identityId;
 
     @Column(nullable = false, length = 50)
     private String firstName;
