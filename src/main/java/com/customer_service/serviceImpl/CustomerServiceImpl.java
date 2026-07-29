@@ -49,7 +49,6 @@ public class CustomerServiceImpl implements CustomerService {
             Customer savedCustomer = repository.save(customer);
         CustomerRegisteredEvent event =
                 new CustomerRegisteredEvent(
-                        1L,
                         savedCustomer.getIdentityId(),
                         savedCustomer.getId(),
                         "Dummy-Email",
