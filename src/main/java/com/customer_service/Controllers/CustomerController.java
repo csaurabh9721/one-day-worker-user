@@ -1,6 +1,7 @@
 package com.customer_service.Controllers;
 
 import com.customer_service.dto.ApiResponse;
+import com.customer_service.dto.CustomerDetailResponse;
 import com.customer_service.dto.CustomerRequestDto;
 import com.customer_service.dto.CustomerResponseDto;
 import com.customer_service.service.CustomerService;
@@ -17,6 +18,14 @@ import java.util.List;
 @AllArgsConstructor
 public class CustomerController {
     private CustomerService customerService;
+
+    @GetMapping("/getCustomerDetail")
+    public ResponseEntity<ApiResponse<CustomerDetailResponse>> getCustomerDetail() {
+        CustomerDetailResponse customer = customerService.getCustomerDetail();
+        ApiResponse<CustomerDetailResponse> response = new ApiResponse<>(HttpStatus.OK.value(), customer, "Customer fetched successfully");
+        return ResponseEntity.ok(response);
+    }
+
 
     @GetMapping("/getCustomerById/{id}")
     public ResponseEntity<ApiResponse<CustomerResponseDto>> getCustomerById(@PathVariable Long id) {

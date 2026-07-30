@@ -1,14 +1,14 @@
 package com.customer_service.serviceImpl;
 
 import com.customer_service.AppConfiguration.RabbitMQConfig;
-import com.customer_service.dto.CustomerRegisteredEvent;
-import com.customer_service.dto.CustomerRequestDto;
-import com.customer_service.dto.CustomerResponseDto;
+import com.customer_service.dto.*;
 import com.customer_service.entity.Customer;
 import com.customer_service.globleException.DuplicateRequestContentException;
 import com.customer_service.globleException.ResourceNotFound;
 import com.customer_service.repository.CustomerRepository;
+import com.customer_service.service.AuthFeignClient;
 import com.customer_service.service.CustomerService;
+import com.customer_service.util.security.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -26,11 +26,34 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepository repository;
     private final ModelMapper modelMapper;
     private final RabbitTemplate rabbitTemplate;
+    private final AuthFeignClient authFeignClient;
 
     @Override
     public List<CustomerResponseDto> getCustomers() {
         List<Customer> customers = repository.findAll();
         return customers.stream().map(this::convertToDto).toList();
+    }
+
+    @Override
+    public CustomerDetailResponse getCustomerDetail() {
+        Long id =  SecurityUtil.getCurrentUserId();
+        Customer customer = repository.findByIdentityId(id).orElseThrow(() -> new ResourceNotFound("Customer not found with id :" + id));
+
+        IdentityDto identity = authFeignClient.authMe();
+        return CustomerDetailResponse.builder()
+                .email(identity.getEmail())
+                .emailVerified(identity.getEmailVerified())
+                .phoneVerified(identity.getPhoneVerified())
+                .id(customer.getId())
+                .identityId(customer.getIdentityId())
+                .firstName(customer.getFirstName())
+                .lastName(customer.getLastName())
+                .phone(customer.getPhone())
+                .gender(customer.getGender())
+                .dob(customer.getDob())
+                .profileImage(customer.getProfileImage())
+                .active(customer.getActive())
+                .build();
     }
 
     @Override
