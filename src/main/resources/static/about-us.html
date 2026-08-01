@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn more about OneDayWorker — connecting customers with trusted, skilled professionals for everyday services." />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0b1f3a" />
+    <meta property="og:title" content="About Us | OneDayWorker" />
+    <meta property="og:description" content="Connecting people with trusted workers for everyday needs." />
+    <meta property="og:type" content="website" />
+    <title>About Us | OneDayWorker</title>
+
+    <style>
+        :root {
+            --primary: #0b1f3a;
+            --primary-2: #12345d;
+            --accent: #ff7a00;
+            --accent-dark: #e96500;
+            --text: #172033;
+            --muted: #647084;
+            --surface: #ffffff;
+            --surface-soft: #f7f9fc;
+            --border: #e6eaf0;
+            --shadow: 0 18px 50px rgba(11, 31, 58, 0.10);
+            --radius: 20px;
+            --max-width: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+            "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text);
+            background: var(--surface);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        .container {
+            width: min(100% - 40px, var(--max-width));
+            margin-inline: auto;
+        }
+
+        .skip-link {
+            position: fixed;
+            left: 16px;
+            top: -60px;
+            z-index: 9999;
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        .skip-link:focus {
+            top: 16px;
+        }
+
+        /* Header */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.96);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+        }
+
+        .nav {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 21px;
+            font-weight: 800;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-weight: 900;
+            font-size: 17px;
+        }
+
+        .brand span span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #3f4a5d;
+            font-size: 14px;
+            font-weight: 650;
+            transition: color .2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus-visible,
+        .nav-links .active {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0 20px;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff !important;
+            font-weight: 750 !important;
+            box-shadow: 0 8px 22px rgba(255, 122, 0, .22);
+        }
+
+        .nav-cta:hover,
+        .nav-cta:focus-visible {
+            background: var(--accent-dark) !important;
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: #fff;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background:
+                    radial-gradient(circle at 90% 25%, rgba(255, 122, 0, .10), transparent 30%),
+                    linear-gradient(180deg, #fff 0%, #fbfcfe 100%);
+            padding: 88px 0 80px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            right: -160px;
+            bottom: -200px;
+            background: rgba(11, 31, 58, .035);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 18px;
+            color: var(--accent);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 26px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        h1 {
+            max-width: 720px;
+            color: var(--primary);
+            font-size: clamp(2.55rem, 5vw, 4.6rem);
+            line-height: 1.06;
+            letter-spacing: -.045em;
+            margin-bottom: 24px;
+        }
+
+        h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero-copy {
+            max-width: 650px;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            min-height: 48px;
+            padding: 0 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            font-weight: 750;
+            transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 10px 25px rgba(255, 122, 0, .20);
+        }
+
+        .btn-secondary {
+            background: #fff;
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .hero-card {
+            position: relative;
+            min-height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-circle {
+            width: min(390px, 80vw);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #fff1e5, #fff8f1);
+            box-shadow: var(--shadow);
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(255, 122, 0, .10);
+        }
+
+        .worker-placeholder {
+            width: 72%;
+            aspect-ratio: 1;
+            border-radius: 48% 48% 42% 42%;
+            background: linear-gradient(150deg, var(--accent), #ff9c45);
+            position: relative;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: clamp(60px, 8vw, 100px);
+            font-weight: 900;
+            box-shadow: 0 25px 50px rgba(255, 122, 0, .20);
+        }
+
+        .worker-placeholder::before {
+            content: "OW";
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: rgba(255,255,255,.95);
+            letter-spacing: .04em;
+        }
+
+        .trust-badge {
+            position: absolute;
+            right: 2%;
+            bottom: 4%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 17px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            font-size: 13px;
+            font-weight: 750;
+            color: var(--primary);
+        }
+
+        .badge-icon {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #eaf7ef;
+            color: #16834a;
+            font-weight: 900;
+        }
+
+        /* Sections */
+        section {
+            padding: 88px 0;
+        }
+
+        .section-heading {
+            max-width: 720px;
+            margin: 0 auto 46px;
+            text-align: center;
+        }
+
+        .section-heading h2 {
+            color: var(--primary);
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -.035em;
+            margin-bottom: 13px;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .info-card {
+            padding: 36px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: #fff;
+            box-shadow: 0 10px 35px rgba(11,31,58,.055);
+        }
+
+        .info-card:first-child {
+            background: linear-gradient(145deg, #fff8f2, #fff);
+        }
+
+        .info-card:last-child {
+            background: linear-gradient(145deg, #f3f7ff, #fff);
+        }
+
+        .card-icon {
+            width: 52px;
+            height: 52px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 22px;
+            border-radius: 15px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            color: var(--muted);
+        }
+
+        /* Values */
+        .values-section {
+            background: var(--surface-soft);
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 25px 18px;
+        }
+
+        .value-icon {
+            width: 62px;
+            height: 62px;
+            margin: 0 auto 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #fff1e5;
+            color: var(--accent);
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .value-card h3 {
+            color: var(--primary);
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .value-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* Story */
+        .story-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            align-items: center;
+            gap: 65px;
+        }
+
+        .story-visual {
+            min-height: 390px;
+            border-radius: 28px;
+            background:
+                    linear-gradient(135deg, rgba(11,31,58,.96), rgba(18,52,93,.96));
+            display: grid;
+            place-items: center;
+            padding: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .story-visual::before,
+        .story-visual::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 50%;
+        }
+
+        .story-visual::before {
+            width: 360px;
+            height: 360px;
+        }
+
+        .story-visual::after {
+            width: 220px;
+            height: 220px;
+        }
+
+        .story-mark {
+            position: relative;
+            z-index: 1;
+            width: 130px;
+            height: 130px;
+            border-radius: 35px;
+            display: grid;
+            place-items: center;
+            background: var(--accent);
+            color: #fff;
+            font-size: 32px;
+            font-weight: 900;
+            transform: rotate(-5deg);
+            box-shadow: 0 20px 45px rgba(0,0,0,.20);
+        }
+
+        .story-content .eyebrow {
+            margin-bottom: 12px;
+        }
+
+        .story-content h2 {
+            color: var(--primary);
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -.035em;
+            margin-bottom: 20px;
+        }
+
+        .story-content p {
+            color: var(--muted);
+            margin-bottom: 17px;
+        }
+
+        .check-list {
+            list-style: none;
+            margin-top: 25px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            color: #3f4a5d;
+            font-weight: 600;
+        }
+
+        .check {
+            flex: 0 0 auto;
+            width: 23px;
+            height: 23px;
+            margin-top: 2px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #eaf7ef;
+            color: #16834a;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        /* Impact */
+        .impact {
+            padding: 70px 0;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .impact .section-heading h2,
+        .impact .section-heading p {
+            color: #fff;
+        }
+
+        .impact .section-heading p {
+            opacity: .75;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            text-align: center;
+        }
+
+        .stat {
+            padding: 12px;
+        }
+
+        .stat strong {
+            display: block;
+            color: #fff;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: -.03em;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 8px;
+            color: rgba(255,255,255,.72);
+            font-size: 14px;
+        }
+
+        /* CTA */
+        .cta-section {
+            padding: 80px 0;
+        }
+
+        .cta {
+            position: relative;
+            overflow: hidden;
+            padding: 52px 60px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, var(--accent), #ff9841);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .cta::after {
+            content: "";
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            right: -100px;
+            top: -150px;
+            border-radius: 50%;
+            border: 45px solid rgba(255,255,255,.12);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            line-height: 1.15;
+            margin-bottom: 10px;
+        }
+
+        .cta p {
+            color: rgba(255,255,255,.88);
+        }
+
+        .cta .btn {
+            position: relative;
+            z-index: 1;
+            background: #fff;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        /* Footer */
+        footer {
+            background: #07172c;
+            color: #fff;
+        }
+
+        .footer-main {
+            padding: 65px 0 45px;
+            display: grid;
+            grid-template-columns: 1.35fr 1fr 1fr 1fr;
+            gap: 45px;
+        }
+
+        .footer-brand {
+            margin-bottom: 17px;
+        }
+
+        .footer-description {
+            max-width: 330px;
+            color: rgba(255,255,255,.62);
+            font-size: 14px;
+        }
+
+        .footer-title {
+            margin-bottom: 17px;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        .footer-links a,
+        .footer-contact {
+            color: rgba(255,255,255,.62);
+            font-size: 14px;
+            transition: color .2s ease;
+        }
+
+        .footer-links a:hover,
+        .footer-links a:focus-visible {
+            color: #fff;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.10);
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            color: rgba(255,255,255,.52);
+            font-size: 13px;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 980px) {
+            .hero-grid,
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .hero {
+                padding-top: 65px;
+            }
+
+            .hero-copy {
+                max-width: 760px;
+            }
+
+            .hero-card {
+                min-height: 360px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 35px;
+            }
+
+            .footer-main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cta {
+                padding: 45px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                width: min(100% - 28px, var(--max-width));
+            }
+
+            .nav {
+                min-height: 68px;
+            }
+
+            .menu-toggle {
+                display: grid;
+                place-items: center;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                left: 14px;
+                right: 14px;
+                top: 75px;
+                padding: 15px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
+                background: #fff;
+                border: 1px solid var(--border);
+                border-radius: 14px;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 12px 14px;
+                border-radius: 8px;
+            }
+
+            .nav-links a:hover,
+            .nav-links a:focus-visible {
+                background: var(--surface-soft);
+            }
+
+            .nav-cta {
+                text-align: center;
+            }
+
+            .hero {
+                padding: 58px 0 60px;
+            }
+
+            section {
+                padding: 65px 0;
+            }
+
+            .mission-grid,
+            .values-grid,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .info-card {
+                padding: 28px;
+            }
+
+            .story-visual {
+                min-height: 300px;
+            }
+
+            .cta {
+                padding: 34px 25px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 50px 0 35px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            /* Intentionally left light: this page is a branded public-facing page. */
+        }
+    </style>
+</head>
+
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site-header">
+    <div class="container nav">
+        <a class="brand" href="/static" aria-label="OneDayWorker home">
+            <span class="brand-mark" aria-hidden="true">OW</span>
+            <span>OneDay<span>Worker</span></span>
+        </a>
+
+        <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+                aria-controls="main-navigation"
+        >
+            ☰
+        </button>
+
+        <nav id="main-navigation" aria-label="Main navigation">
+            <ul class="nav-links">
+                <li><a href="/static">Home</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/how-it-works">How It Works</a></li>
+                <li><a class="active" href="/about-us" aria-current="page">About Us</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/contact-us">Contact Us</a></li>
+                <li><a class="nav-cta" href="/services">Book a Worker</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main id="main-content">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="about-title">
+        <div class="container hero-grid">
+            <div>
+                <div class="eyebrow">About OneDayWorker</div>
+
+                <h1 id="about-title">
+                    Connecting People
+                    <span class="highlight">With Trusted Workers</span>
+                </h1>
+
+                <p class="hero-copy">
+                    OneDayWorker is built to make everyday services simpler by connecting
+                    customers with skilled, reliable and trusted professionals. Whether
+                    you need help at home, repairs, maintenance or other daily services,
+                    we're here to make getting the right help easier.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn btn-primary" href="/services">Explore Services</a>
+                    <a class="btn btn-secondary" href="/contact-us">Contact Us</a>
+                </div>
+            </div>
+
+            <div class="hero-card" aria-label="OneDayWorker trusted worker illustration">
+                <div class="hero-circle">
+                    <div class="worker-placeholder" aria-hidden="true"></div>
+                </div>
+
+                <div class="trust-badge">
+                    <span class="badge-icon" aria-hidden="true">✓</span>
+                    Trusted Service Platform
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section aria-labelledby="mission-heading">
+        <div class="container">
+            <div class="section-heading">
+                <h2 id="mission-heading">Our Mission &amp; Vision</h2>
+                <p>
+                    We are building a service platform around trust, convenience,
+                    reliability and a better experience for both customers and workers.
+                </p>
+            </div>
+
+            <div class="mission-grid">
+                <article class="info-card">
+                    <div class="card-icon" aria-hidden="true">◎</div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        Our mission is to simplify access to reliable and skilled workers
+                        by using technology to make finding, booking and managing everyday
+                        services convenient, transparent and dependable.
+                    </p>
+                </article>
+
+                <article class="info-card">
+                    <div class="card-icon" aria-hidden="true">◉</div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        Our vision is to become a trusted platform for on-demand services,
+                        helping customers find the right professionals while creating
+                        meaningful opportunities for skilled workers.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="values-section" aria-labelledby="values-heading">
+        <div class="container">
+            <div class="section-heading">
+                <h2 id="values-heading">What Makes Us Different</h2>
+                <p>
+                    Everything we build is focused on creating a dependable experience
+                    from discovery to service completion.
+                </p>
+            </div>
+
+            <div class="values-grid">
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">✓</div>
+                    <h3>Trusted &amp; Verified</h3>
+                    <p>
+                        We aim to connect customers with dependable professionals and
+                        create a trustworthy service experience.
+                    </p>
+                </article>
+
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">◇</div>
+                    <h3>Safe &amp; Secure</h3>
+                    <p>
+                        Customer and worker safety is an important part of the platform
+                        experience we are building.
+                    </p>
+                </article>
+
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">◷</div>
+                    <h3>Convenient Service</h3>
+                    <p>
+                        We make it easier to discover services, choose workers and manage
+                        service requests from one place.
+                    </p>
+                </article>
+
+                <article class="value-card">
+                    <div class="value-icon" aria-hidden="true">★</div>
+                    <h3>Customer First</h3>
+                    <p>
+                        We continuously focus on creating a simple, transparent and
+                        customer-friendly experience.
+                    </p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story -->
+    <section aria-labelledby="story-heading">
+        <div class="container story-grid">
+            <div class="story-visual" aria-hidden="true">
+                <div class="story-mark">OW</div>
+            </div>
+
+            <div class="story-content">
+                <div class="eyebrow">Our Story</div>
+
+                <h2 id="story-heading">
+                    Making Everyday Services Easier
+                </h2>
+
+                <p>
+                    Finding a dependable person for an everyday task should not be
+                    complicated. OneDayWorker is designed to bring customers and skilled
+                    workers together through a simple digital experience.
+                </p>
+
+                <p>
+                    From discovering a service to connecting with a suitable worker,
+                    our goal is to reduce friction and make the entire experience more
+                    convenient and transparent.
+                </p>
+
+                <ul class="check-list">
+                    <li>
+                        <span class="check" aria-hidden="true">✓</span>
+                        Discover services that match your needs.
+                    </li>
+                    <li>
+                        <span class="check" aria-hidden="true">✓</span>
+                        Find suitable workers through a simple experience.
+                    </li>
+                    <li>
+                        <span class="check" aria-hidden="true">✓</span>
+                        Manage your service journey from one place.
+                    </li>
+                    <li>
+                        <span class="check" aria-hidden="true">✓</span>
+                        Build trust through transparency and customer feedback.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact -->
+    <section class="impact" aria-labelledby="impact-heading">
+        <div class="container">
+            <div class="section-heading">
+                <h2 id="impact-heading">Our Growing Impact</h2>
+                <p>
+                    Replace these figures with your verified production metrics when
+                    your platform is live.
+                </p>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <strong>10K+</strong>
+                    <span>Happy Customers</span>
+                </div>
+
+                <div class="stat">
+                    <strong>5K+</strong>
+                    <span>Workers</span>
+                </div>
+
+                <div class="stat">
+                    <strong>50K+</strong>
+                    <span>Jobs Completed</span>
+                </div>
+
+                <div class="stat">
+                    <strong>4.8/5</strong>
+                    <span>Average Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+        <div class="container">
+            <div class="cta">
+                <div class="cta-content">
+                    <h2 id="cta-heading">Need a trusted worker?</h2>
+                    <p>
+                        Find the service you need and take the next step with OneDayWorker.
+                    </p>
+                </div>
+
+                <a class="btn" href="/services">Book a Worker</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container footer-main">
+        <div>
+            <a class="brand footer-brand" href="/static" aria-label="OneDayWorker home">
+                <span class="brand-mark" aria-hidden="true">OW</span>
+                <span style="color:#fff">OneDay<span>Worker</span></span>
+            </a>
+
+            <p class="footer-description">
+                Connecting customers with trusted professionals for everyday service
+                needs.
+            </p>
+        </div>
+
+        <div>
+            <h2 class="footer-title">Quick Links</h2>
+            <ul class="footer-links">
+                <li><a href="/static">Home</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/how-it-works">How It Works</a></li>
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/contact-us">Contact Us</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h2 class="footer-title">Popular Services</h2>
+            <ul class="footer-links">
+                <li><a href="/services">Home Cleaning</a></li>
+                <li><a href="/services">Plumbing</a></li>
+                <li><a href="/services">Electrical</a></li>
+                <li><a href="/services">Carpentry</a></li>
+                <li><a href="/services">Appliance Repair</a></li>
+                <li><a href="/services">Painting</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <h2 class="footer-title">Contact Us</h2>
+
+            <div class="footer-contact">
+                <span aria-hidden="true">☎</span>
+                <span>+91 98765 43210</span>
+            </div>
+
+            <div class="footer-contact">
+                <span aria-hidden="true">✉</span>
+                <span>support@onedayworker.com</span>
+            </div>
+
+            <div class="footer-contact">
+                <span aria-hidden="true">⌖</span>
+                <span>India</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container footer-bottom">
+        <p>© <span id="current-year"></span> OneDayWorker. All rights reserved.</p>
+
+        <div class="footer-legal">
+            <a href="/privacy-policy">Privacy Policy</a>
+            <a href="/terms">Terms &amp; Conditions</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (function () {
+        const menuButton = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        if (menuButton && navLinks) {
+            menuButton.addEventListener("click", function () {
+                const isOpen = navLinks.classList.toggle("open");
+                menuButton.setAttribute("aria-expanded", String(isOpen));
+                menuButton.setAttribute(
+                    "aria-label",
+                    isOpen ? "Close navigation menu" : "Open navigation menu"
+                );
+            });
+
+            navLinks.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navLinks.classList.remove("open");
+                    menuButton.setAttribute("aria-expanded", "false");
+                    menuButton.setAttribute("aria-label", "Open navigation menu");
+                });
+            });
+        }
+
+        const year = document.getElementById("current-year");
+        if (year) {
+            year.textContent = new Date().getFullYear();
+        }
+    })();
+</script>
+</body>
+</html>

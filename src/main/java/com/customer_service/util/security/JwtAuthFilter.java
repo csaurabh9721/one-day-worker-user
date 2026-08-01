@@ -24,6 +24,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
 
+        System.out.println(
+                "Customer JWT Filter -> "
+                        + request.getMethod()
+                        + " "
+                        + request.getRequestURI()
+        );
+
         String uri = request.getRequestURI();
         String method = request.getMethod();
 
@@ -31,6 +38,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (uri.startsWith("/swagger-ui")
                 || uri.startsWith("/v3/api-docs")
                 || uri.startsWith("/testApi")) {
+            return true;
+        }
+        // Public About Us
+        if ("GET".equalsIgnoreCase(method)
+                && (
+                uri.equals("/customerService/about-us")
+                        || uri.startsWith("/customerService/about-us/")
+                        || uri.equals("/about-us.html")
+                        || uri.startsWith("/about-us.html/")
+                        || uri.equals("/favicon.ico")
+        )) {
             return true;
         }
 

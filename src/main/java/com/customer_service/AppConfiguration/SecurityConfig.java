@@ -61,6 +61,16 @@ public class SecurityConfig {
                                 "/v3/api-docs/**"
                         ).permitAll()
 
+                        // Public About Us
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/customerService/about-us",
+                                "/customerService/about-us/**",
+                                "/about-us.html",
+                                "/about-us.html/**",
+                                "/favicon.ico"
+                        ).permitAll()
+
                         // Test APIs
                         .requestMatchers("/testApi/**")
                         .permitAll()
