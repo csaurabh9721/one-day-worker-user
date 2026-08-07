@@ -2,6 +2,11 @@ spring:
   config:
     activate:
       on-profile: prod
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: onedayworker
+    password: onedayworker
 
   datasource:
     url: jdbc:mysql://host.docker.internal:3306/customer_service
